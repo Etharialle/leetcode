@@ -1,2 +1,0 @@
-[i:])
-    mergedArray.extend(secondArr
