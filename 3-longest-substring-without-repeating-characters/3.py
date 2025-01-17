@@ -5,7 +5,7 @@ s = " "
 # 1) initialize empty list
 # 2) for loop to check if character is in list already if not increment length
 # 3) remove first character from string, repeat 1 and 2, then remove second character until lenth of string either 0 or less than max length found
-"""
+
 maxLength = 0
 stringLength = len(s)
 while stringLength > 0:
@@ -26,7 +26,7 @@ while stringLength > 0:
 
 print(maxLength)
 # return maxLength
-"""
+
 
 # optimized using the same idea as add two numbers
 """
