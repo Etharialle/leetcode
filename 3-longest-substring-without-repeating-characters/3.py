@@ -29,6 +29,12 @@ print(maxLength)
 """
 
 # optimized using the same idea as add two numbers
+"""
 lookup = {}
+length = 0
+maxLength = 0
+lastRem = 0
 for index, char in enumerate(s):
-
+    if char in lookup and lastRem <= lookup[char]:
+        length = 
+"""
