@@ -1,86 +1,61 @@
 #inputs
-l1 = [9,9,9,9,9,9,9]
+l1_list = [2,4,3]
 # 2 -> 4 -> 3
-l2 = [9,9,9,9]
+l2_list = [5,6,4]
 # 5 -> 6 -> 4
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-test_node = ListNode(l1)
-# Can we make a regular list out of each linked list?
-# If so then the next step is to reverse both of the new lists
-# add the lists together
-# use the result list to create a new linked list
-class LinkedList:
-    def __init__(self):
-        self.head = None
 
-    @classmethod
-    def from_listnode(cls, head: ListNode):
-        """Converts an existing ListNode (single-node or chain) to a LinkedList."""
-        new_list = cls()
-        new_list.head = head
-        return new_list
+l1_2 = ListNode(l1_list[2])
+l1_1 = ListNode(l1_list[1],l1_2)
+l1 = ListNode(l1_list[0],l1_1)
 
-    def append(self, val):
-        if not self.head:
-            self.head = ListNode(val)
-            return
-        current = self.head
-        while current.next:
-            current = current.next
-        current.next = ListNode(val)
+l2_2 = ListNode(l2_list[2])
+l2_1 = ListNode(l2_list[1],l2_2)
+l2 = ListNode(l2_list[0],l2_1)
 
-    def create_list(self):
-        current = self.head
-        new_list = []
-        while current:
-            new_list.append(current.val)
-            current = current.next
-        return new_list
+resultNode = ListNode()
+currentNode = resultNode
+carry = 0
+
+while l1 or l2 or carry:
+    v1 = l1.val if l1 else 0
+    v2 = l2.val if l2 else 0
+
+    val = v1 + v2 + carry
+    carry = val // 10 # floor division (this should always be either 0 or 1)
+    val = val % 10 # get the remainder
+    currentNode.next = ListNode(val)
+
+    currentNode = currentNode.next
+    l1 = l1.next if l1 else None
+    l2 = l2.next if l2 else None
+
+
+# helper functions
+def get_ll_length(head):
+    length = 0
+    current = head
+    while current:
+        length += 1
+        current = current.next
+    return length
+
+def pretty_print_linked_list(head):
+    if not head:
+        print("Empty Linked List")
+        return
     
-    def pretty_print(self):
-        current = self.head
-        result = []
-        while current:
-            result.append(str(current.val))
-            current = current.next
-        print(" -> ".join(result) + " -> None")
+    current = head
+    result = []
     
-new_ll = LinkedList.from_listnode(test_node)
-new_ll.pretty_print()
+    while current:
+        result.append(str(current.val))  # Convert values to string for joining
+        current = current.next
+    
+    print(" -> ".join(result) + " -> None")
 
-ll1 = LinkedList()
-ll2 = LinkedList()
-
-for i in range(len(l1)):
-    ll1.append(l1[i])
-for i in range(len(l2)):
-    ll2.append(l2[i])
-
-ll1.pretty_print()
-ll2.pretty_print()
-
-first_list = ll1.create_list()
-first_list.reverse()
-second_list = ll2.create_list()
-second_list.reverse()
-
-
-first_str = ''.join(map(str, first_list))
-print(first_str)
-second_str = ''.join(map(str, second_list))
-first_number = int(first_str)
-second_number = int(second_str)
-
-result_int = first_number + second_number
-result_array = [int(x) for x in str(result_int)]
-print(result_array)
-result_array.reverse()
-print(result_array)
-ll_result = LinkedList()
-for i in range(len(result_array)):
-    ll_result.append(result_array[i])
-
-ll_result.pretty_print()
+# result (use `return resultNode.next` for LC)
+pretty_print_linked_list(resultNode.next)
