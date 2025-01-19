@@ -1,7 +1,7 @@
 # inputs
 strs = ["eat","tea","tan","ate","nat","bat"]
-strs = [""]
-strs = ["a"]
+# strs = [""]
+# strs = ["a"]
 
 # Problem Statement: Given an array of strings strs, group the 
 # anagrams together. You can return the answer in any order.
@@ -27,3 +27,16 @@ def groupAnagrams(strs: list[str]) -> list[list[str]]:
 
 print(groupAnagrams(strs))
 
+def groupAnagrams_hash(strs: list[str]) -> list[list[str]]:
+    result = {}
+    for x in strs:
+        count = [0] * 26
+        for c in x:
+            count[ord(c) - ord('a')] += 1
+        if tuple(count) not in result:
+            result[tuple(count)] = [x]
+        else:
+            result[tuple(count)].append(x)
+    return list(result.values())
+
+print(groupAnagrams_hash(strs))
