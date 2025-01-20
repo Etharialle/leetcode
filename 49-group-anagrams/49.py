@@ -30,8 +30,10 @@ print(groupAnagrams(strs))
 def groupAnagrams_hash(strs: list[str]) -> list[list[str]]:
     result = {}
     for x in strs:
+        # create an array with each letter
         count = [0] * 26
         for c in x:
+            # ord(c) - ord('a') returns the array position for count zero indexed
             count[ord(c) - ord('a')] += 1
         if tuple(count) not in result:
             result[tuple(count)] = [x]
