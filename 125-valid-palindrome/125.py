@@ -13,8 +13,6 @@ s = "A man, a plan, a canal: Panama"
 def isPalindrome(s: str) -> bool:
     s = s.lower()
     s = ''.join(char for char in s if char.isalnum())
-    #regex
-    #brute for force is split, reverse, compare
     s_list = list(s)
     s_reverse = s_list
     s_reverse.reverse()
@@ -23,3 +21,18 @@ def isPalindrome(s: str) -> bool:
     return False
 
 print(isPalindrome(s))
+
+def isPalindrome_pointers(s: str) -> bool:
+    s = s.lower()
+    s = ''.join(char for char in s if char.isalnum())
+    print(len(s))
+    x = 0
+    y = len(s) - 1
+    while x < y:
+        y = (len(s) - 1) - x
+        if s[x] != s[y]:
+            return False
+        x += 1
+    return True
+
+print(isPalindrome_pointers(s))
