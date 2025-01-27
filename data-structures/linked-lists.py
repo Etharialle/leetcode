@@ -16,19 +16,84 @@ class LinkedList:
         if value == None:
             print("no value argument")
             return
-        if self.root == None:
-            self.root = ListNode(value)
-            return
-        newNode = ListNode(value,self.root)
+        newNode = ListNode(value)
+        newNode.next = self.root
         self.root = newNode
         return
 
 
     # append a node
+    def append_node(self, value=None):
+        if value == None:
+            print("no value argument")
+            return
+        if self.root == None:
+            self.root = ListNode(value)
+            return
+        current = self.root
+        newNode = ListNode(value)
+        while current.next:
+            current = current.next
+        current.next = newNode
+        return
 
     # insert node at position
+    def insert_node(self, value, index=0):
+        if self.root == None:
+            self.root = ListNode(value)
+            return
+        if index == 0:
+            newNode = ListNode(value)
+            newNode.next = self.root
+            self.root = newNode
+            return
+        pointer = 1
+        current = self.root
+        while index > pointer and current.next:
+            current = current.next
+            pointer += 1
+        newNode = ListNode(value)
+        newNode.next = current.next
+        current.next = newNode
+        return
+
+
+    # get length of list
+    def get_size(self):
+        if self.root == None:
+            return 0
+        pointer = 1
+        current = self.root
+        while current.next:
+            current = current.next
+            pointer += 1
+        return pointer
 
     # get a node
+    def get_index(self, index=0):
+        if self.root == None:        
+            print("Empty List")
+        if self.get_size() <= index:
+            print("index out of range returning last node")
+        pointer = 0
+        current = self.root
+        while pointer < index and current.next:
+            current = current.next
+            pointer += 1
+        return current.value
+        
+    # finde node by value
+    def find_value(self, value):
+        if not self.root:
+            print("Empty List")
+            return 
+        current = self.root
+        while current:
+            if current.value == value:
+                return current
+            current = current.next
+        return None
+
 
     # print the list
     def print_ll(self):
@@ -49,8 +114,9 @@ class LinkedList:
 ll = LinkedList()
 ll.prepend_node(1)
 ll.prepend_node(2)
-ll.prepend_node()
-
+ll.append_node(9)
+print(ll.get_index(2))
+ll.insert_node(7,3)
 ll.print_ll()
 
-
+print(ll.find_value(4))
