@@ -24,5 +24,9 @@ class Solution:
         print(bst)
         print(l_array)
         print(r_array)
+        while l_array:
+            mid = (l + len(l_array) - 1) // 2
+            bst.left = l_array[mid]
+            
 
 Solution().sortedArrayToBST(nums)
