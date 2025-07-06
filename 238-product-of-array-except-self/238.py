@@ -15,14 +15,27 @@ nums = [1,2,3,4]
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # result = []
+        # for x in range(len(nums)):
+        #     product = 1
+        #     tempArray = nums.copy()
+        #     del tempArray[x]
+        #     for y in tempArray:
+        #         product *= y
+        #     result.append(product)
+        # return result
+
+        prefixArray = []
+        suffixArray = []
         result = []
-        for x in range(len(nums)):
-            product = 1
-            tempArray = nums.copy()
-            del tempArray[x]
-            for y in tempArray:
-                product *= y
-            result.append(product)
-        return result
+        for x in nums:
+            prefix = math.prod(nums[:x])
+            print(prefix)
+            suffix = math.prod(nums[x+1:])
+            answer = prefix * suffix
+            result.append(answer)
+        result_shift = result[-1:] + result[:-1]
+        return result_shift
+
 
 print(Solution().productExceptSelf(nums))
