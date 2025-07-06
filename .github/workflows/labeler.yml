@@ -1,0 +1,22 @@
+# .github/workflows/pr-labeler.yml
+name: 'PR Labeler on Merge'
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  labeler:
+    # This condition ensures the job only runs for MERGED pull requests,
+    # not just any closed PR.
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Run Labeler
+        uses: actions/labeler@v5
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'

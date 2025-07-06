@@ -1,0 +1,25 @@
+# .github/labeler.yml
+
+# Label for documentation changes
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+
+# Label for data-structures folder
+data-structures:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'data-structures/**/*'
+
+# Label for the meta folder
+career:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'meta/**/*'
+
+# Label for any folder that starts with a number
+leetcode:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '[0-9]*/**/*'
